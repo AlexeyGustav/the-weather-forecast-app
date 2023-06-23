@@ -40,6 +40,7 @@ export const getCurrentDateTime = () => {
   
   let hours = date.getHours();
   let minutes = date.getMinutes();
+  
 
   if (hours < 10) {
     hours = '0' + hours;
