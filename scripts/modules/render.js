@@ -18,6 +18,7 @@ export const renderWidgetToday = (widget, data) => {
         <div class="widget__city">
           <p>${data.name}</p>
           <button class="widget__change-city" aria-label="Изменить город"></button>
+          
         </div>
         <p class="widget__temp-big">${(data.main.temp - 273.15).toFixed(1)}°C</p>
         <p class="widget__felt">ощущается</p>
@@ -25,12 +26,21 @@ export const renderWidgetToday = (widget, data) => {
       </div>
     </div>`
   )
+
+
+  const changeBtn = document.querySelector('.widget__change-city');
+  console.log('changeBtn: ', changeBtn);
+  changeBtn.addEventListener('click', () => {
+    console.log('click');
+  })
+
 };
 export const renderWidgetOther = (widget, data) => {
 
   // эта функция меняет стрелку ветра в зависимости от данных которые к ней приходят в переменную indexDeg
   function windDirection() {
     let indexDeg = data.wind.deg;
+    // console.log('indexDeg: ', indexDeg);
     let indexDegStr = '';
     
     if (indexDeg > 10 && indexDeg <= 75) {
@@ -51,6 +61,32 @@ export const renderWidgetOther = (widget, data) => {
       indexDegStr ='&#8593;'
     } 
     return indexDegStr
+
+    // switch(+indexDeg) {
+    //   case indexDeg > 10 && indexDeg <= 75:
+    //     indexDegStr = '&#8599;';
+    //     break;
+    //   case indexDeg > 80 && indexDeg <= 100:
+    //     indexDegStr = '&#8594;';
+    //     break;
+    //   case indexDeg > 100 && indexDeg <= 170:
+    //     indexDegStr = '&#8600;';
+    //     break;
+    //   case indexDeg > 170 && indexDeg <= 190:
+    //     indexDegStr = '&#8595;';
+    //     break;
+    //   case indexDeg > 190 && indexDeg <= 260:
+    //     indexDegStr = '&#8601;' ;
+    //     break; 
+    //   case indexDeg > 260 && indexDeg <= 280:
+    //     indexDegStr = '&#8592;';
+    //     break;
+    //   case indexDeg > 280 && indexDeg <= 350:
+    //     indexDegStr = '&#8598;';
+    //     break;
+    //   default:
+    //     indexDegStr ='&#8593;';       
+    // }
 
   }
 

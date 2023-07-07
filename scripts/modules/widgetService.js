@@ -1,6 +1,7 @@
 import { renderWidgetForecast, renderWidgetOther, renderWidgetToday, showError } from './render.js';
 import { fetchForecast, fetchWeather } from './APIservice.js';
 
+
 export const startWidget = async () => {
 
   const city = 'Ардатов';

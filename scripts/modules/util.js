@@ -62,19 +62,19 @@ export const calculateDevPoint = (temp, humidity) => {
   const b = 237.7;
 
   const ft = (a * temp)/(b + temp) + Math.log(humidity/100);
-  const dewPoint = (b * ft) / (a- ft);
+  const dewPoint = (b * ft) / (a - ft);
 
   return dewPoint.toFixed(1);
 }
 
 export const convertPressure = (pressure) => {
   const mmHg = pressure * 0.750063755419211;
-  return mmHg.toFixed(2)
+  return mmHg.toFixed(2);
 };
 
 export const getWeatherForecastData = (data) => {
   const forecast = data.list.filter((item) => {
-    return new Date(item.dt_txt).getHours() === 12 && new Date(item.dt_txt).getDate() > new Date().getDate();
+    return new Date(item.dt_txt).getHours() === 12 && new Date(item.dt_txt).getDate() >= new Date().getDate();
   });
   
   const forecastData = forecast.map((item) => {
@@ -87,7 +87,7 @@ export const getWeatherForecastData = (data) => {
       'чт',
       'пт',
       'сб',
-    ]
+    ];
 
     const dayOfWeek = weekDaysShort[date.getDay()];
     const weatherIcon = item.weather[0].icon;
@@ -102,9 +102,9 @@ export const getWeatherForecastData = (data) => {
       const tempDate = new Date(data.list[i].dt_txt);
       
       
-      if(tempDate.getDate() === date.getDate() && temp < minTemp) {
+      if(tempDate.getDate() === date.getDate() && temp <= minTemp) {
         minTemp = temp;
-      } else if (tempDate.getDate() === date.getDate() && temp > maxTemp) {
+      } else if (tempDate.getDate() === date.getDate() && temp >= maxTemp) {
         maxTemp = temp;
       }
     }
@@ -119,3 +119,4 @@ export const getWeatherForecastData = (data) => {
   });
   return forecastData;
 };
+
