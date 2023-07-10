@@ -16,9 +16,11 @@ export const renderWidgetToday = (widget, data) => {
       </div>
       <div class="widget__wheather">
         <div class="widget__city">
-          <p>${data.name}</p>
+          <p class="widget__p">${data.name}</p>
           <button class="widget__change-city" aria-label="Изменить город"></button>
-          
+          <form class="widget__form active">
+            <input type="text" class="widget__input" placeholder="Введите название города">
+          </form>
         </div>
         <p class="widget__temp-big">${(data.main.temp - 273.15).toFixed(1)}°C</p>
         <p class="widget__felt">ощущается</p>
@@ -26,13 +28,27 @@ export const renderWidgetToday = (widget, data) => {
       </div>
     </div>`
   )
+// делаем вывод input с названиями городов:
 
-
+function addInput() {
   const changeBtn = document.querySelector('.widget__change-city');
-  console.log('changeBtn: ', changeBtn);
+  const toggleForm = document.querySelector('.widget__form');
+  const enterFormCity = document.querySelector('.widget__input')
+  const outFormCity = document.querySelector('.widget__p');
+ 
+  
   changeBtn.addEventListener('click', () => {
-    console.log('click');
+    toggleForm.classList.toggle('active');
   })
+  enterFormCity.addEventListener('keyup', function(e) {
+    outFormCity.textContent = e.target.value;
+  })
+  
+}
+setTimeout(addInput, 1000);
+
+
+  
 
 };
 export const renderWidgetOther = (widget, data) => {

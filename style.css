@@ -188,4 +188,6 @@
   height: 30px;
 }
 
-/* <div class="widget__form"><input class="widget__input"></div> */
+.active {
+  display: none;
+}
