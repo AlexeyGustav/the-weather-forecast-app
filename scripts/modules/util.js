@@ -48,7 +48,7 @@ export const getCurrentDateTime = () => {
   }
 
   if (minutes < 10) {
-    minutes += '0' 
+    minutes = `0${minutes}`
   }
 
   return {dayOfWeek, dayOfMonth, hours, minutes, month, year}
@@ -73,9 +73,11 @@ export const convertPressure = (pressure) => {
 };
 
 export const getWeatherForecastData = (data) => {
-  const forecast = data.list.filter((item) => {
-    return new Date(item.dt_txt).getHours() === 12 && new Date(item.dt_txt).getDate() >= new Date().getDate();
-  });
+  const forecast = 
+  data.list.filter((item) => 
+    new Date(item.dt_txt).getHours() === 12 && 
+    new Date(item.dt_txt).getDate() < new Date().getDate() + 5,
+  );
   
   const forecastData = forecast.map((item) => {
     const date = new Date(item.dt_txt);
@@ -102,11 +104,14 @@ export const getWeatherForecastData = (data) => {
       const tempDate = new Date(data.list[i].dt_txt);
       
       
-      if(tempDate.getDate() === date.getDate() && temp <= minTemp) {
-        minTemp = temp;
-      } else if (tempDate.getDate() === date.getDate() && temp >= maxTemp) {
-        maxTemp = temp;
-      }
+      if(tempDate.getDate() === date.getDate()) {
+        if(temp < minTemp){
+          minTemp = temp;
+        }
+        if (temp > maxTemp) {
+          maxTemp = temp;
+        }
+      } 
     }
 
     return {
